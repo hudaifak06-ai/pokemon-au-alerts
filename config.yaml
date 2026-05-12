@@ -1,0 +1,61 @@
+# Pokemon restock alert configuration
+
+# Keywords used to filter results from each store's search page.
+# A product is alerted only if its title contains at least one of these.
+keywords:
+  - pokemon
+  - pokémon
+  - elite trainer box
+  - booster box
+  - booster bundle
+  - tin
+  - etb
+
+# Optional: only alert on products whose titles match one of these substrings
+# (case-insensitive). Leave empty to alert on every Pokemon product that
+# changes from out-of-stock to in-stock.
+watchlist:
+  - prismatic evolutions
+  - surging sparks
+  - destined rivals
+  - 151
+  - paldean fates
+
+# Per-store enable flags. Every enabled store below offers Click & Collect
+# or in-store pickup somewhere in Australia. Disable stores you don't care
+# about to save scrape budget.
+stores:
+  # --- Big-box & department stores (Click & Collect at every store) ---
+  target_au:      { enabled: true,  url: "https://www.target.com.au/search?searchTerm=pokemon" }
+  kmart_au:       { enabled: true,  url: "https://www.kmart.com.au/search/?Ntt=pokemon" }
+  bigw:           { enabled: true,  url: "https://www.bigw.com.au/search?text=pokemon" }
+  officeworks:    { enabled: true,  url: "https://www.officeworks.com.au/shop/officeworks/search?q=pokemon" }
+  woolworths:     { enabled: true,  url: "https://www.woolworths.com.au/shop/search/products?searchTerm=pokemon" }
+  coles:          { enabled: true,  url: "https://www.coles.com.au/search?q=pokemon" }
+
+  # --- Toy / entertainment chains ---
+  ebgames:        { enabled: true,  url: "https://www.ebgames.com.au/browse?q=pokemon" }
+  jbhifi:         { enabled: true,  url: "https://www.jbhifi.com.au/search?query=pokemon%20tcg" }
+  zing:           { enabled: true,  url: "https://www.zingpopculture.com.au/search?q=pokemon+tcg" }
+  smyths_toys:    { enabled: true,  url: "https://www.smythstoys.com/au/en-au/search?q=pokemon" }
+  toyworld:       { enabled: true,  url: "https://www.toyworld.com.au/search?q=pokemon" }
+  toymate:        { enabled: true,  url: "https://toymate.com.au/search?q=pokemon" }
+  sanity:         { enabled: true,  url: "https://www.sanity.com.au/search?q=pokemon" }
+
+  # --- Hobby / specialty stores with in-store pickup ---
+  good_games:     { enabled: true,  url: "https://goodgames.com.au/search?q=pokemon" }
+  gamesmen:       { enabled: true,  url: "https://www.gamesmen.com.au/search.php?search_query=pokemon" }
+  card_crusade:   { enabled: true,  url: "https://cardcrusade.com.au/search?q=pokemon" }
+
+  # --- Disabled by default ---
+  costco_au:      { enabled: false, url: "" }  # requires member login
+
+# Alert behaviour
+alerts:
+  # Only post when an item flips from out-of-stock -> in-stock,
+  # or when a brand-new product appears. Set to true to also post
+  # on price changes.
+  on_price_change: false
+  # Minimum minutes between alerts for the same product, to avoid spam
+  # if a store flickers in/out of stock.
+  cooldown_minutes: 60
